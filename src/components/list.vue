@@ -21,7 +21,7 @@
 	import seckill from "./seckill";
 	import show from "./show";
 	import wares from "./wares";
-	
+	let top = 0;
 	export default {
 		data() {
 			return {
@@ -31,9 +31,12 @@
 		components:{banner,navmeau,news,seckill,show,wares},
 		mounted(){
 			this.$http({
-				url:"/data/products.data"
+				url:"http://localhost:3001/list",
+				method:"get"
 			}).then(res=>this.msg=res.data)
-		}
+		},
+		updated(){document.documentElement.scrollTop=top;},
+		destroyed(){top=document.documentElement.scrollTop;}
 	}
 </script>
 

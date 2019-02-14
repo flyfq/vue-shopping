@@ -13,6 +13,7 @@ import "./assets/css/swiper.min.css";
 
 import axios from "./plugins/axios.js";
 Vue.use(axios)
+// axios.defaults.withCredentials=true;
 
 import "animate.css";
 

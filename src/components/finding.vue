@@ -12,6 +12,7 @@
 	import findcart from "./findcart";
 	import banner from "./banner";
 	import findgroup from "./findgroup";
+	let top =0;
 	export default {
 		data() {
 			return {
@@ -23,12 +24,14 @@
 		},
 		mounted() {
 			this.$http({
-				url:"/data/find.data"
+				url:"http://localhost:3001/finding",
+				method:"get"
 			}).then(
 			  res=>this.msg1=res.data
 			)
-		}
-		
+		},
+		updated(){document.documentElement.scrollTop=top;},
+		destroyed(){top=document.documentElement.scrollTop;}
 	}
 </script>
 

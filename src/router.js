@@ -4,17 +4,17 @@ import Router from 'vue-router'
 
 Vue.use(Router);
 
-	// import list from "./components/list";
-	const list = () => import( './components/list')
-	const buycart = () => import( './components/buycart')
-	const count = () => import( './components/count')
-	const finding = () => import( './components/finding')
-	const productlist = () => import( './components/productlist')
-	const item = () => import( './components/item')
-	const user = () => import( './components/user')
-	const login = () => import( './components/login')
-	const reg = () => import( './components/reg')
-	const error = () => import( './components/error')
+	import list from "./components/list";
+	// const list = () => import( './components/list')
+	const buycart = () => import(/* webpackChunkName: "buycart" */ './components/buycart')
+	const count = () => import(/* webpackChunkName: "count" */ './components/count')
+	const finding = () => import(/* webpackChunkName: "finding" */ './components/finding')
+	const productlist = () => import(/* webpackChunkName: "productlist" */ './components/productlist')
+	const item = () => import(/* webpackChunkName: "item" */ './components/item')
+	const user = () => import(/* webpackChunkName: "user" */ './components/user')
+	const login = () => import(/* webpackChunkName: "login" */ './components/login')
+	const reg = () => import(/* webpackChunkName: "reg" */ './components/reg')
+	const error = () => import(/* webpackChunkName: "error" */ './components/error')
 	
 // 	import buycart from "./components/buycart";
 // 	import count from "./components/count";
@@ -43,5 +43,8 @@ const routes =[
 ]
 
 export default new Router({
-  routes
+  routes,
+	 scrollBehavior (to, from, savedPosition) {
+		return { x: 0, y: 0 }
+	}
 })
