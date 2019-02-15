@@ -4,7 +4,7 @@ let mutations={
   [VIEW_NAV]:(state,payload)=>{state.bnav=payload},
 	[VIEW_FOOT]:(state,payload)=>{state.bfoot=payload},
 	[VIEW_LOADING]:(state,payload)=>{state.bloading=payload},
-	[CHECK_USER]:(state,payload)=>{state.user=payload.user}
+	[CHECK_USER]:(state,payload)=>{state.user.auth=payload}
 
 };
 export default mutations;

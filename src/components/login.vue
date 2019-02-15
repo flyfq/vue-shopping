@@ -26,34 +26,62 @@
 	        </div>
 	    </div>
 	    <div class="weui-cells__tips text-right"><a href="">忘记密码？</a></div>
-	    <div class="login-btn" @click="checklogin"><a href="javascript:;" class="weui-btn weui-btn_warn theme-bgcolor">登录</a></div>
+	    <div class="login-btn" @click="login"><a href="javascript:;" class="weui-btn weui-btn_warn theme-bgcolor">登录</a></div>
 	</section>
 	</div>
 </template>
 
 <script>
 	import loginheader from "./loginheader";
-	import * as types from "../store/types"
+	import * as types from "../store/types";
+	import store from "../store";
 	export default {
 		components:{loginheader},
 		data() {
 			return {
-				userTel:"13916268176",
-				password:"123456"
+				userTel:"",
+				password:""
 			};
 		},
 		methods:{
-			checklogin(){
-				this.$store.dispatch({
-					type:types.CHECK_USER,
-					userTel:this.useTel,
-					password:this.password,
-					}).then(
-					(auth)=>{
-						// this.$store.state.user.auth
-						if(auth){this.$router.push("/user")}else{this.$router.push("/error")}
+			// checklogin(){
+			// 	this.$store.dispatch({
+			// 		type:types.CHECK_USER,
+			// 		userTel:this.useTel,
+			// 		password:this.password,
+			// 		}).then(
+			// 		(auth)=>{
+			// 			// this.$store.state.user.auth
+			// 			if(auth){this.$router.push("/user")}else{this.$router.push("/error")}
+			// 		}
+			// 		)
+			// }
+			login(){
+
+				this.$http({
+					url:'http://localhost:3001/login',
+					params:{
+						username:this.userTel,
+						password:this.password,
+					},
+					// withCredentials:true
+				}).then((res)=>{
+					console.log('访问login接口后',res.data);
+					if(res.data.error==0){
+						//路由跳转
+						// console.log('成功可以跳转了');
+						//存到状态管理，或者直接跳转到user,或者传数据给user
+						// console.log("拉拉",this.$router)
+						this.$store.dispatch(types.CHECK_USER,true)
+						// store.state.user.auth=true;
+						// console.log(store.state.user.auth)
+						this.$router.push('/user')
+					}else if(res.data.error==1){
+						alert("密码输入错误")
+					}else if(res.data.error==2){
+						this.$router.push("/reg")
 					}
-					)
+				})
 			}
 		}
 	}

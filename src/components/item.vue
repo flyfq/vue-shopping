@@ -165,7 +165,11 @@
 			let dataName = this.$route.query.dataName;
 			
 			this.$http({
-				url:'/data/'+dataName+'.data'
+				url:'http://localhost:3001/item',
+				method:"get",
+				params:{
+					id:id
+				}
 			}).then(
 				res=>this.itemlist = res.data[id-1]
 			)
